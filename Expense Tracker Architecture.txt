@@ -1,0 +1,68 @@
+📱 React Native App (Frontend)
+│
+│
+├── 🔐 Stores JWT Token (after login)
+│
+├── 📤 Sends API Requests
+│     - POST /auth/register
+│     - POST /auth/login
+│     - PATCH /profile (update profile)
+│     - GET /profile (get profile)
+│     - POST /expenses/addExpenses
+│     - POST /expenses/getExpenses (filters, pagination)
+│     - GET /expenses/export (CSV)
+│
+│
+▼
+🌐 Express.js Server (Backend)
+│
+├── 📂 Routes
+│     ├── /auth         → register, login
+│     ├── /profile      → get/update user profile
+│     └── /expenses     → add/get/export expenses
+│
+├── 🧩 Middleware
+│     └── authenticate (checks JWT token and adds req.userId)
+│
+├── ✅ Validators
+│     └── express-validator for auth/profile/expenses
+│
+├── 🧠 Controllers
+│     ├── Handle user creation, login, profile update
+│     ├── Handle expense creation, filtering, export
+│
+├── 🔐 JWT Auth
+│     └── Signs token on login
+│     └── Verifies token on protected routes
+│
+│
+▼
+🗄️ Sequelize ORM + MySQL DB
+│
+├── 📦 Models
+│     ├── User
+│     │     - id (UUID), email, username, password
+│     │     - monthlyLimit, dob, theme, currency
+│     │     - createdAt, updatedAt
+│     │
+│     ├── Expense
+│     │     - id (UUID), title, amount, date
+│     │     - categoryId (FK), paymentModeId (FK)
+│     │     - userId (FK)
+│     │
+│     ├── ExpenseCategory
+│     │     - id (UUID), name (Food, Travel, etc.)
+│     │
+│     └── PaymentMode
+│           - id (UUID), name (Cash, UPI, etc.)
+│
+├── 🔄 Relationships
+│     - User         1:N Expense
+│     - Expense      N:1 PaymentMode
+│     - Expense      N:1 ExpenseCategory
+│
+├── 🧪 Seed Script (scripts/seed.js)
+│     - Populates default payment modes and categories
+│
+└── 📄 CSV Export (GET /expenses/export)
+      - Uses filters and generates downloadable file
