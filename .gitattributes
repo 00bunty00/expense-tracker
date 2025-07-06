@@ -1,0 +1,10 @@
+# Handle line endings consistently
+* text=auto
+
+# Force Unix-style (LF) line endings for all source code files
+*.js text eol=lf
+*.ts text eol=lf
+*.json text eol=lf
+*.sql text eol=lf
+*.md text eol=lf
+*.sh text eol=lf
